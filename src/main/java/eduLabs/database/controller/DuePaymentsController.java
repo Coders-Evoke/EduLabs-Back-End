@@ -2,6 +2,7 @@ package eduLabs.database.controller;
 
 import eduLabs.database.model.DuePaymentsModel;
 import eduLabs.database.model.StudentClass;
+import eduLabs.database.model.StudentPaymentModel;
 import eduLabs.database.repository.DuePaymentsRepository;
 import eduLabs.database.service.DuePaymentsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,13 @@ public class DuePaymentsController {
     @Autowired
     private DuePaymentsServiceImp service;
 
-//    @GetMapping("/getDuePayments")
-//    public Optional<DuePaymentsModel> getDuePayments(@RequestBody String StudentId){
-//        return service.getDuePayments(StudentId);
-//    }
 
     @GetMapping("/getDuePayments/{studentId}")
-    public List<DuePaymentsModel> getDuePaymentsByStudentId(@PathVariable String studentId) {
-        String sql = "SELECT * FROM student_payment WHERE studentid = ?";
+    public StudentPaymentModel[] getDuePaymentsByStudentId(@PathVariable String studentId) {
         List<DuePaymentsModel> duePayments = repository.getDuePaymentsQuery(studentId);
-        return duePayments;
+        List<List<String>> classnameid = repository.getClassNameFee(studentId);
+//        return duePayments;
+        return service.returnPaymentInformation(duePayments, classnameid);
     }
 
     @PostMapping("/addDuePayment")
@@ -39,9 +37,6 @@ public class DuePaymentsController {
 
     @PutMapping("/updatePayment")
     public DuePaymentsModel updatePayment(@RequestBody DuePaymentsModel payment){
-//        System.out.println(id);
-//        System.out.println(months);
-//        return service.updateDuePayments(id, months);
         Optional<DuePaymentsModel> duePayment = repository.findById(new StudentClass(payment.getId().getStudentID(), payment.getId().getClassID()));
 
 //        if (duePayment.isPresent()) {
@@ -54,4 +49,13 @@ public class DuePaymentsController {
 //        }
     }
 
+    @DeleteMapping("/removeStudent")
+    public String removeStudent(@RequestBody String studentId){
+        repository.deleteStudent(studentId);
+        return "Student "+studentId+" has been removed from all the classes.";
+    }
+    @DeleteMapping("/removeStudentClass")
+    public String removeStudentClass(@RequestBody StudentClass id){
+        return service.deleteStudentClass(id);
+    }
 }
