@@ -1,6 +1,6 @@
 package eduLabs.database.controller;
 
-import eduLabs.database.model.DuePaymentsModel;
+import eduLabs.database.model.DuePaymentsTableModel;
 import eduLabs.database.model.StudentClass;
 import eduLabs.database.model.StudentPaymentModel;
 import eduLabs.database.repository.DuePaymentsRepository;
@@ -24,23 +24,23 @@ public class DuePaymentsController {
 
     @GetMapping("/getDuePayments/{studentId}")
     public StudentPaymentModel[] getDuePaymentsByStudentId(@PathVariable String studentId) {
-        List<DuePaymentsModel> duePayments = repository.getDuePaymentsQuery(studentId);
+        List<DuePaymentsTableModel> duePayments = repository.getDuePaymentsQuery(studentId);
         List<List<String>> classnameid = repository.getClassNameFee(studentId);
 //        return duePayments;
         return service.returnPaymentInformation(duePayments, classnameid);
     }
 
     @PostMapping("/addDuePayment")
-    public DuePaymentsModel addDuePayment(@RequestBody DuePaymentsModel duePayments){
+    public DuePaymentsTableModel addDuePayment(@RequestBody DuePaymentsTableModel duePayments){
         return service.addDuePayments(duePayments);
     }
 
     @PutMapping("/updatePayment")
-    public DuePaymentsModel updatePayment(@RequestBody DuePaymentsModel payment){
-        Optional<DuePaymentsModel> duePayment = repository.findById(new StudentClass(payment.getId().getStudentID(), payment.getId().getClassID()));
+    public DuePaymentsTableModel updatePayment(@RequestBody DuePaymentsTableModel payment){
+        Optional<DuePaymentsTableModel> duePayment = repository.findById(new StudentClass(payment.getId().getStudentID(), payment.getId().getClassID()));
 
 //        if (duePayment.isPresent()) {
-            DuePaymentsModel existingPayment = duePayment.get();
+            DuePaymentsTableModel existingPayment = duePayment.get();
             existingPayment.setDueMonths(payment.getDueMonths());
             return repository.save(existingPayment);
 //        }

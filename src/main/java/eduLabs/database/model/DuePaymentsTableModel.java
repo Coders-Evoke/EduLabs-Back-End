@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "student_payment")
 
-public class DuePaymentsModel {
+public class DuePaymentsTableModel {
 
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,20 +22,5 @@ public class DuePaymentsModel {
     private int dueMonths;
 
 
-    public StudentClass getId() {
-        return id;
-    }
-
-    public void setId(StudentClass id) {
-        this.id = id;
-    }
-
-    public int getDueMonths() {
-        return dueMonths;
-    }
-
-    public void setDueMonths(int dueMonths) {
-        this.dueMonths = dueMonths;
-    }
 }
 

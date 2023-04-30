@@ -1,6 +1,6 @@
 package eduLabs.database.service;
 
-import eduLabs.database.model.DuePaymentsModel;
+import eduLabs.database.model.DuePaymentsTableModel;
 import eduLabs.database.model.StudentClass;
 import eduLabs.database.model.StudentPaymentModel;
 import eduLabs.database.repository.DuePaymentsRepository;
@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DuePaymentsServiceImp implements DuePaymentsService{
@@ -18,7 +16,7 @@ public class DuePaymentsServiceImp implements DuePaymentsService{
     @Autowired
     private DuePaymentsRepository repository;
 
-    public StudentPaymentModel[] returnPaymentInformation(List<DuePaymentsModel> duepayment, List<List<String>> classNameFee){
+    public StudentPaymentModel[] returnPaymentInformation(List<DuePaymentsTableModel> duepayment, List<List<String>> classNameFee){
         StudentPaymentModel[] studentPaymentModel= new StudentPaymentModel[duepayment.size()];
         for(int x=0; x<duepayment.size(); x++){
             StudentPaymentModel studentPayment = new StudentPaymentModel();
@@ -33,14 +31,14 @@ public class DuePaymentsServiceImp implements DuePaymentsService{
     }
 
     @Override
-    public DuePaymentsModel addDuePayments(DuePaymentsModel duePayment) {
+    public DuePaymentsTableModel addDuePayments(DuePaymentsTableModel duePayment) {
         return repository.save(duePayment);
 
     }
 
     @Override
-    public DuePaymentsModel updateDuePayments(StudentClass ID, Integer months) {
-        DuePaymentsModel oldRecord = repository.findById(ID).orElse(null);
+    public DuePaymentsTableModel updateDuePayments(StudentClass ID, Integer months) {
+        DuePaymentsTableModel oldRecord = repository.findById(ID).orElse(null);
         oldRecord.setDueMonths(months);
         return repository.save(oldRecord);
     }
