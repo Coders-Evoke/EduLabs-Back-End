@@ -20,17 +20,24 @@ public class PaymentTableModel {
     @GeneratedValue
     private long paymentID;
 
-    @Column(length = 6)
-    private String studentID;
+    @ManyToOne
+    @JoinColumn(name = "studentid")
+    private StudentTableModel studentTableModel;
 
-    @Column(length = 4)
-    private String classID;
+
+    @ManyToOne
+    @JoinColumn(name = "classid")
+    private ClassTableModel classTableModel;
 
     @Column
     private int months;
 
     @Column
     private Date paymentDate;
+
+
+
+
 
 }
 

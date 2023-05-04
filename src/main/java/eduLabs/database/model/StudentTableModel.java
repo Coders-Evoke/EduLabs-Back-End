@@ -4,12 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -46,13 +43,14 @@ public class StudentTableModel {
     @Column
     private String address;
 
-//    @Column(length = 12)
-//    private long parentNIC;
+    @ManyToOne()
+    @JoinColumn(name = "parentnic")
+    private ParentTableModel parentTableModel;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name = "parentnic", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private ParentTableModel parent;
-    
+    @OneToMany(mappedBy = "studentTableModel")
+    private List<PaymentTableModel> paymentTableModels;
+
+    @OneToMany(mappedBy = "studentTableModel")
+    private List<AttendanceTableModel> attendanceTableModels;
 
 }

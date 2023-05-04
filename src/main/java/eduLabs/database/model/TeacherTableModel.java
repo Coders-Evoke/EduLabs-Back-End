@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -42,6 +43,6 @@ public class TeacherTableModel {
     @Column
     private String address;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
-    private Set<ClassTableModel> class_table = new HashSet<>();
+    @OneToMany(mappedBy = "teacherTableModel")
+    private List<ClassTableModel> classTableModelList;
 }

@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -35,6 +35,6 @@ public class ParentTableModel {
     @Column
     private String address;
 
-    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
-    private Set<StudentTableModel> student = new HashSet<>();
+    @OneToMany(mappedBy = "parentTableModel")
+    private List<StudentTableModel> studentTableModels;
 }

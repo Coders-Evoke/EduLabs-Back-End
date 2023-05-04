@@ -17,8 +17,9 @@ public class TuteTableModel {
     @Column(length = 5)
     private String tuteID;
 
-    @Column(length = 4)
-    private String classID;
+    @ManyToOne
+    @JoinColumn (name = "classid")
+    private ClassTableModel classTableModel;
 
     @Column(length = 20)
     private String title;

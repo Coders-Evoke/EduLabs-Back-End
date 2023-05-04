@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @AllArgsConstructor
@@ -16,8 +14,17 @@ import org.hibernate.annotations.OnDeleteAction;
 public class DuePaymentsTableModel {
 
     @EmbeddedId
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private StudentClass id;
+
+//    @Id
+//    @ManyToOne
+//    @JoinColumn(name = "studentid", referencedColumnName = "studentid")
+//    private StudentTableModel studentTableModel;
+
+//    @Id
+//    @ManyToOne
+//    @JoinColumn(name = "classid", referencedColumnName = "classid")
+//    private ClassTableModel classTableModel;
 
     private int dueMonths;
 

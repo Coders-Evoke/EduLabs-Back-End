@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,12 +13,18 @@ import java.io.Serializable;
 public class AttendanceTableModel {
 
     @Id
-    @Column(length = 6)
-    private String studentID;
+//    @Column(length = 6)
+//    private String studentID;
+    @ManyToOne
+    @JoinColumn(name = "studentid")
+    private StudentTableModel studentTableModel;
 
     @Id
-    @Column(length = 4)
-    private String classID;
+//    @Column(length = 4)
+//    private String classID;
+    @ManyToOne
+    @JoinColumn(name = "classid")
+    private ClassTableModel classTableModel;
 
     @Id
     @Column(length = 4)

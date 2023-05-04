@@ -4,28 +4,23 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "class_table") //specify the table name in the database
+@Table(name = "class_table")
 public class ClassTableModel {
-    @Id //make primary key
+    @Id
     @Column(length = 4)
     private String classID;
 
-//    @Column(length = 6)
-//    private String teacherID;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacherid" , nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private TeacherTableModel teacher;
+    @ManyToOne
+    @JoinColumn(name = "teacherid")
+    private TeacherTableModel teacherTableModel;
 
     @Column(length = 50)
     private String className;
@@ -47,5 +42,16 @@ public class ClassTableModel {
 
     @Column(length = 5)
     private float teacherShare;
+
+    //Foreign keys
+
+    @OneToMany(mappedBy = "classTableModel")
+    private List<PaymentTableModel> paymentTableModels;
+
+    @OneToMany(mappedBy = "classTableModel")
+    private List<TuteTableModel> tuteTableModels;
+
+    @OneToMany(mappedBy = "classTableModel")
+    private List<AttendanceTableModel> attendanceTableModels;
 
 }
