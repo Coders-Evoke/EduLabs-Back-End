@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -46,12 +48,14 @@ public class ClassTableModel {
     //Foreign keys
 
     @OneToMany(mappedBy = "classTableModel")
-    private List<PaymentTableModel> paymentTableModels;
+    private Set<PaymentTableModel> paymentTableModels = new HashSet<>();
 
     @OneToMany(mappedBy = "classTableModel")
-    private List<TuteTableModel> tuteTableModels;
+    private Set<TuteTableModel> tuteTableModels = new HashSet<>();
 
     @OneToMany(mappedBy = "classTableModel")
-    private List<AttendanceTableModel> attendanceTableModels;
+    private Set<AttendanceTableModel> attendanceTableModels = new HashSet<>();
 
+    @OneToMany(mappedBy = "classTableModel")
+    private Set<EnrollmentTableModel> enrollmentTableModels = new HashSet<>();
 }

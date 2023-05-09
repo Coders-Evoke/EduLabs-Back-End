@@ -5,41 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "payment")
-public class PaymentTableModel {
+@Table(name = "enrollment")
+public class EnrollmentTableModel {
 
     @Id
-    @GeneratedValue
-    private long paymentID;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private long enrollmentId;
 
     @ManyToOne
     @JoinColumn(name = "studentid")
     private StudentTableModel studentTableModel;
 
-
     @ManyToOne
     @JoinColumn(name = "classid")
     private ClassTableModel classTableModel;
 
-    @Column
-    private int months;
-
-    @Column
-    private Date paymentDate;
-
-
-
-
-
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private int dueMonths = 0;
 }
-
-
-
-

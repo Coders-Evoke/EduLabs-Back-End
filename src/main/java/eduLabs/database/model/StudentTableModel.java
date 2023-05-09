@@ -1,12 +1,16 @@
 package eduLabs.database.model;
 
+import eduLabs.database.model.EnrollmentTableModel;
+import eduLabs.database.model.ParentTableModel;
+import eduLabs.database.model.PaymentTableModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -48,9 +52,9 @@ public class StudentTableModel {
     private ParentTableModel parentTableModel;
 
     @OneToMany(mappedBy = "studentTableModel")
-    private List<PaymentTableModel> paymentTableModels;
+    private Set<PaymentTableModel> paymentTableModels = new HashSet<>();
 
     @OneToMany(mappedBy = "studentTableModel")
-    private List<AttendanceTableModel> attendanceTableModels;
+    private Set<EnrollmentTableModel> enrollmentTableModels = new HashSet<>();
 
 }
