@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class EnrollmentController {
 
@@ -38,12 +39,11 @@ public class EnrollmentController {
     public ResponseEntity<String> updatePayment(@RequestBody UpdatePaymentDto paymentDto){
         if(enrollmentService.checkEnrollment(paymentDto.getStudentID(), paymentDto.getClassID())){
             enrollmentService.updatePayment(paymentDto.getStudentID(), paymentDto.getClassID(), paymentDto.getMonths());
-            return ResponseEntity.ok("Payment updated successfully");
+            return new ResponseEntity(paymentDto, HttpStatus.OK);
         }
         else{
             return ResponseEntity.notFound().build();
         }
-
     }
 
     @DeleteMapping("/unenroll")
@@ -60,7 +60,7 @@ public class EnrollmentController {
     @DeleteMapping("/removeStudent/{studentID}")
     public ResponseEntity<String> removeStudent(@PathVariable String studentID){
         if(enrollmentService.checkStudent(studentID)){
-//            enrollmentService.removeStudent(studentID);
+            enrollmentService.removeStudent(studentID);
             return ResponseEntity.ok("Student Removed Successfully");
         }
         else {

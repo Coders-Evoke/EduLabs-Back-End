@@ -90,6 +90,7 @@ public class EnrollmentServiceImp implements EnrollmentService{
 
     @Override
     public void removeStudent(String studentid){
+
         enrollmentRepository.removeStudent(studentid);
     }
 

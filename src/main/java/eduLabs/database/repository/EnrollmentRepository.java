@@ -18,12 +18,12 @@ public interface EnrollmentRepository extends JpaRepository <EnrollmentTableMode
 
     @Query(value = "SELECT CASE WHEN EXISTS " +
             "(SELECT * FROM enrollment WHERE studentid = :StudentId AND classid = :ClassId )" +
-            "THEN 'TRUE'ELSE 'FALSE' END", nativeQuery = true)
+            "THEN 'TRUE' ELSE 'FALSE' END", nativeQuery = true)
     Boolean checkEnrollment(@Param("StudentId") String StudentId, @Param("ClassId") String ClassId);
 
     @Query(value = "SELECT CASE WHEN EXISTS " +
             "(SELECT * FROM enrollment WHERE studentid = :StudentId)" +
-            "THEN 'TRUE'ELSE 'FALSE' END", nativeQuery = true)
+            "THEN 'TRUE' ELSE 'FALSE' END", nativeQuery = true)
     Boolean checkStudent(@Param("StudentId") String StudentId);
 
     @Modifying
