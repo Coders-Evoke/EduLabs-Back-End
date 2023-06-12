@@ -9,7 +9,7 @@ public class Timetable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Id
+
     @Column(name= "ClassID")
     private String classID;
 
