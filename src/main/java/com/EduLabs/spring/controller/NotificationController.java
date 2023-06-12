@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.EduLabs.spring.model.Notification;
 import com.EduLabs.spring.repository.NotificationRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 @Service

@@ -9,6 +9,12 @@ public class Timetable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Id
+    @Column(name= "ClassID")
+    private String classID;
+
+    @Column(name= "Grade")
+    private String grade;
 
     @Column(name = "date")
     private String date;
@@ -26,7 +32,9 @@ public class Timetable {
 
     }
 
-    public Timetable(String date, String time, String subjectID, String subjectName) {
+    public Timetable(String classID,String grade, String date, String time, String subjectID, String subjectName) {
+        this.classID=classID;
+        this.grade=grade;
         this.date = date;
         this.time = time;
         this.subjectID = subjectID;
@@ -35,6 +43,22 @@ public class Timetable {
 
     public long getId() {
         return id;
+    }
+
+    public String getClassID() {
+        return classID;
+    }
+
+    public void setClassID(String classID) {
+        this.classID = classID;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     public String getDate() {

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.EduLabs.spring.model.Timetable;
 import com.EduLabs.spring.repository.TimetableRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class TimetableController {
@@ -65,7 +65,7 @@ public class TimetableController {
         try {
 
             Timetable _timetable = timeTableRepository
-                    .save(new Timetable(timetable.getDate(), timetable.getTime(), timetable.getSubjectID(),
+                    .save(new Timetable(timetable.getClassID(),timetable.getGrade(),timetable.getDate(), timetable.getTime(), timetable.getSubjectID(),
                             timetable.getSubjectName()));
             return new ResponseEntity<>(_timetable, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -80,6 +80,8 @@ public class TimetableController {
         if (timatableData.isPresent()) {
             Timetable _timetable = timatableData.get();
 
+            _timetable.setClassID(timetable.getClassID());
+            _timetable.setGrade(timetable.getGrade());
             _timetable.setDate(timetable.getDate());
             _timetable.setTime(timetable.getTime());
             _timetable.setSubjectID(timetable.getSubjectID());
@@ -99,6 +101,30 @@ public class TimetableController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+//    @DeleteMapping("/timetables/{id}")
+//    public ResponseEntity<Void> deleteTimetable(@PathVariable("id") long id) {
+//        try {
+//            timeTableRepository.deleteById(id);
+//            return ResponseEntity.noContent().build();
+//        } catch (Exception e) {
+//            return ResponseEntity.internalServerError().build();
+//        }
+//    }
+//@DeleteMapping("/timetables/{id}")
+//public ResponseEntity<HttpStatus> deleteTimetable(@PathVariable("id") long id) {
+//    try {
+//        timeTableRepository.deleteById(id);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    } catch (Exception e) {
+//        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+//}
+
+
+
+
+
+
 
     @DeleteMapping("/timetables")
     public ResponseEntity<HttpStatus> deleteAllTimetables() {

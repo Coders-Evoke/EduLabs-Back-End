@@ -1,5 +1,6 @@
-package com.EduLabs.spring.service;
+package com.EduLabs.spring.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,18 +15,25 @@ import com.EduLabs.spring.repository.NotificationRepository;
 public class NotificationService {
 
     @Autowired
-    NotificationRepository notificationRepository;
+    private NotificationRepository notificationRepository;
 
     public List<Notification> getAllNotifications(String time) {
         List<Notification> notifications = new ArrayList<>();
 
         if (time == null) {
-            notificationRepository.findAll().forEach(notifications::add);
+            notifications.addAll(notificationRepository.findAll());
         } else {
-            notificationRepository.findByTimeContaining(time).forEach(notifications::add);
+            notifications.addAll(notificationRepository.findByTimeContaining(time));
         }
 
         return notifications;
+    }
+
+    public void createNotification(String message) {
+        Notification notification = new Notification();
+        notification.setTime(LocalDateTime.now());
+        notification.setMessage(message);
+        notificationRepository.save(notification);
     }
 
     public Optional<Notification> getNotificationById(long id) {
@@ -36,13 +44,13 @@ public class NotificationService {
         return notificationRepository.save(notification);
     }
 
-    public Optional<Notification> updateNotification(long id, Notification notification) {
+    public Optional<Notification> updateNotification(long id, Notification updatedNotification) {
         Optional<Notification> notificationData = notificationRepository.findById(id);
 
         if (notificationData.isPresent()) {
-            Notification _notification = notificationData.get();
-            _notification.setMessage(notification.getMessage());
-            return Optional.of(notificationRepository.save(_notification));
+            Notification notification = notificationData.get();
+            notification.setMessage(updatedNotification.getMessage());
+            return Optional.of(notificationRepository.save(notification));
         } else {
             return Optional.empty();
         }

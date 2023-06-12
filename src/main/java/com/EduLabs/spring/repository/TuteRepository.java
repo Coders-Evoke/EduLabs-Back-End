@@ -7,6 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.EduLabs.spring.model.Tute;
 
 public interface TuteRepository extends JpaRepository<Tute, Long> {
-  // List<Tute> findByPublished(boolean published);
   List<Tute> findByTitleContaining(String title);
 }

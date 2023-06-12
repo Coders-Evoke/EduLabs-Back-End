@@ -2,6 +2,7 @@ package com.EduLabs.spring.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.catalina.Store;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -38,6 +39,4 @@ public class Notification {
     public Notification() {
 
     }
-
-
 }

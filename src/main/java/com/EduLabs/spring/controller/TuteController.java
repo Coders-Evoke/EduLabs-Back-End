@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.EduLabs.spring.model.Tute;
 import com.EduLabs.spring.repository.TuteRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class TuteController {
