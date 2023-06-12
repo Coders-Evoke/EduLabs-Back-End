@@ -2,6 +2,7 @@ package eduLabs.database.service;
 
 import eduLabs.database.model.ClassTableModel;
 import eduLabs.database.model.DTOs.ClassFeesInfoDto;
+import eduLabs.database.model.DTOs.ClassTableDto;
 import eduLabs.database.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,4 +38,25 @@ public class ClassServiceImp implements ClassService{
         classInfo.setMonthlyFee(newClassFeesInfo.getMonthlyFee());
         this.classRepository.save(classInfo);
     }
+
+    @Override
+    public ClassTableDto getClassInfo(String classId) {
+        ClassTableModel classTableModel = this.classRepository.findById(classId).orElseThrow();
+
+        ClassTableDto classInfo = new ClassTableDto();
+
+        classInfo.setClassID(classTableModel.getClassID());
+        classInfo.setTeacherId(classTableModel.getTeacherTableModel().getTeacherID());
+        classInfo.setClassName(classTableModel.getClassName());
+        classInfo.setGrade(classTableModel.getGrade());
+        classInfo.setDayOfWeek(classTableModel.getDayOfWeek());
+        classInfo.setTime(classTableModel.getTime());
+        classInfo.setDuration(classTableModel.getDuration());
+        classInfo.setMonthlyFee(classTableModel.getMonthlyFee());
+        classInfo.setTeacherShare(classTableModel.getTeacherShare());
+
+        return classInfo;
+    }
+
+
 }

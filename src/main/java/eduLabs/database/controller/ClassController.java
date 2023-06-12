@@ -1,7 +1,7 @@
 package eduLabs.database.controller;
 
-import eduLabs.database.model.ClassTableModel;
 import eduLabs.database.model.DTOs.ClassFeesInfoDto;
+import eduLabs.database.model.DTOs.ClassTableDto;
 import eduLabs.database.service.ClassServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,5 +26,10 @@ public class ClassController {
     public ResponseEntity<ClassFeesInfoDto> updateClassFees(@RequestBody ClassFeesInfoDto newClassFeesInfo){
         this.classService.updateClassFees(newClassFeesInfo);
         return new ResponseEntity<>(newClassFeesInfo, HttpStatus.OK);
+    }
+
+    @GetMapping("/getClassInfo/{classId}")
+    public ResponseEntity<ClassTableDto> getClassInfo(@PathVariable String classId){
+        return new ResponseEntity<>(this.classService.getClassInfo(classId), HttpStatus.OK);
     }
 }

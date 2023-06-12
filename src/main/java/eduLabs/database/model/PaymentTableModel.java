@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
@@ -16,13 +17,11 @@ import java.util.Date;
 public class PaymentTableModel {
 
     @Id
-    @GeneratedValue
-    private long paymentID;
+    private String paymentID;
 
     @ManyToOne
     @JoinColumn(name = "studentid")
     private StudentTableModel studentTableModel;
-
 
     @ManyToOne
     @JoinColumn(name = "classid")
@@ -33,10 +32,6 @@ public class PaymentTableModel {
 
     @Column
     private Date paymentDate;
-
-
-
-
 
 }
 
